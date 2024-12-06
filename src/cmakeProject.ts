@@ -174,13 +174,14 @@ export class CMakeProject {
         return this.workspaceContext.folder;
     }
 
+    // TODO: figure out what these "historical reasons" are
     /**
      * The folder associated with this CMakeProject.
      * For single-project folders, this is the WorkspaceFolder for historical reasons.
      * For multi-project folders, this is the directory where the CMakeProject lives (this.sourceDir)
      */
     get folderPath(): string {
-        return this.isMultiProjectFolder ? this.sourceDir : this.workspaceContext.folder.uri.fsPath;
+        return this.sourceDir;
     }
 
     /**
