@@ -446,6 +446,10 @@ export class ProjectController implements vscode.Disposable {
                 // to referesh it.
                 void vscode.commands.executeCommand('cmake.statusbar.update');
             }
+
+            if (ext.extensionManager) {
+                await ext.enableFullFeatureSet(ext.extensionManager.workspaceHasAtLeastOneProject());
+            }
         }
     }
 
