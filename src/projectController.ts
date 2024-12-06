@@ -423,7 +423,7 @@ export class ProjectController implements vscode.Disposable {
             // Add projects.
             const workspaceContext = DirectoryContext.createForDirectory(folder, new StateManager(this.extensionContext, folder));
             for (let i = 0; i < sourceDirectories.length; i++) {
-                const cmakeProject: CMakeProject = await CMakeProject.create(workspaceContext, sourceDirectories[i], this, sourceDirectories.length > 1);
+                const cmakeProject: CMakeProject = await CMakeProject.create(workspaceContext, sourceDirectories[i], this, projects.length > 1);
                 if (activeProjectPath === cmakeProject.sourceDir) {
                     await this.setActiveProject(cmakeProject, options);
 
@@ -556,7 +556,7 @@ export class ProjectController implements vscode.Disposable {
     private async doCMakeFileChangeReconfigure(uri: vscode.Uri): Promise<void> {
         const activeProject: CMakeProject | undefined = this.getActiveCMakeProject();
         if (activeProject) {
-            const isFileInsideActiveProject: boolean = util.isFileInsideFolder(uri, activeProject.isMultiProjectFolder ? activeProject.folderPath : activeProject.workspaceFolder.uri.fsPath);
+            const isFileInsideActiveProject: boolean = util.isFileInsideFolder(uri, activeProject.folderPath);
             // A save of settings.json triggers the doSave event (doSaveTextDocument or onDidRenameFile)
             // before the settings update event (onDidChangeConfiguration).
             // If the user updates cmakePath, the below doCMakeFileChangeReconfigure will operate on the old value.
