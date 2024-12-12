@@ -423,7 +423,7 @@ export class ProjectController implements vscode.Disposable {
             // Add projects.
             const workspaceContext = DirectoryContext.createForDirectory(folder, new StateManager(this.extensionContext, folder));
             for (let i = 0; i < sourceDirectories.length; i++) {
-                const cmakeProject: CMakeProject = await CMakeProject.create(workspaceContext, sourceDirectories[i], this, projects.length > 1);
+                const cmakeProject: CMakeProject = await CMakeProject.create(workspaceContext, sourceDirectories[i], this, projects.length + sourceDirectories.length > 1);
                 if (activeProjectPath === cmakeProject.sourceDir) {
                     await this.setActiveProject(cmakeProject, options);
 
