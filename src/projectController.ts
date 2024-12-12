@@ -33,7 +33,7 @@ export class ProjectController implements vscode.Disposable {
     private readonly buildDirectorySub = new Map<vscode.WorkspaceFolder, vscode.Disposable>();
     private readonly installPrefixSub = new Map<vscode.WorkspaceFolder, vscode.Disposable>();
     private readonly useCMakePresetsSub = new Map<vscode.WorkspaceFolder, vscode.Disposable>();
-    private readonly hideDebugButtonSub  = new Map<vscode.WorkspaceFolder, vscode.Disposable>();
+    private readonly hideDebugButtonSub = new Map<vscode.WorkspaceFolder, vscode.Disposable>();
 
     private readonly beforeAddFolderEmitter = new vscode.EventEmitter<vscode.WorkspaceFolder>();
     private readonly afterAddFolderEmitter = new vscode.EventEmitter<FolderProjectType>();
@@ -243,7 +243,7 @@ export class ProjectController implements vscode.Disposable {
         const allCMakeProjects: CMakeProject[] = this.getAllCMakeProjects();
         for (const project of allCMakeProjects) {
             if (util.platformNormalizePath(project.sourceDir) === sourceDir ||
-                    util.platformNormalizePath(project.workspaceFolder.uri.fsPath) === sourceDir) {
+                util.platformNormalizePath(project.workspaceFolder.uri.fsPath) === sourceDir) {
                 return project;
             }
         }
@@ -436,7 +436,9 @@ export class ProjectController implements vscode.Disposable {
             if (activeProjectPath !== undefined) {
                 // Active project is no longer available. Pick a different one.
                 await this.setActiveProject(projects.length > 0 ? projects[0] : undefined, options);
-
+            } else if (this.activeProject === undefined && projects.length > 0) {
+                // If there wasn't an active project before, pick the first one
+                await this.setActiveProject(projects[0], options)
             }
 
             // Update the map.
