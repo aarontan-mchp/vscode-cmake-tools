@@ -438,7 +438,7 @@ export class ProjectController implements vscode.Disposable {
                 await this.setActiveProject(projects.length > 0 ? projects[0] : undefined, options);
             } else if (this.activeProject === undefined && projects.length > 0) {
                 // If there wasn't an active project before, pick the first one
-                await this.setActiveProject(projects[0], options)
+                await this.setActiveProject(projects[0], options);
             }
 
             // Update the map.

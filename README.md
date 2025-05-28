@@ -2,6 +2,8 @@
 
 [CMake Tools](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools) provides the native developer a full-featured, convenient, and powerful workflow for CMake-based projects in Visual Studio Code.
 
+**Note**: This fork exists as a temporary measure until https://github.com/microsoft/vscode-cmake-tools/issues/4203 is fixed and published in a CMake Tools release.
+
 ## Important doc links
 
 - [CMake Tools quick start](https://code.visualstudio.com/docs/cpp/CMake-linux)
